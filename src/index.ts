@@ -28,7 +28,7 @@ app.get('/ipinfo/:ip', async (c) => {
   const resp = await fetch(`https://ipinfo.io/${ip}?token=${c.req.query('token')}`)
   if(resp.status === 200){
     const data = await resp.json()
-    await c.env.IP_STORE.put(ip, JSON.stringify(data), {expiration: Date.now()/1000 + 120 })
+    await c.env.IP_STORE.put(ip, JSON.stringify(data), {expiration: Date.now()/1000 + 86400 })
 
     return c.json(data)
   }
