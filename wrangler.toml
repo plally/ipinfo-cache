@@ -1,0 +1,7 @@
+name = "ipinfo-proxy"
+main = "src/index.ts"
+compatibility_date = "2022-07-24"
+
+kv_namespaces = [
+    { binding = "IP_STORE", id = "3dc6a94da7e5433c817d868c59769ebd" }
+]
