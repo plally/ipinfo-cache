@@ -20,7 +20,6 @@ app.get('/ipinfo/:ip', async (c) => {
   const ip = decodeURI(rawIP)
 
   const cachedData = await c.env.IP_STORE.get(ip, {type:"json"})
-
   if(cachedData?.ip == ip) {
     return c.json(cachedData)
   }
@@ -29,7 +28,7 @@ app.get('/ipinfo/:ip', async (c) => {
 
   const resp = await fetch(`https://ipinfo.io/${ip}?token=${token}`)
   if(resp.status != 200){
-    return c.json({"error": resp.status})
+    return resp
   }
 
   const data: any = await resp.json()
