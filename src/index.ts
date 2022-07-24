@@ -16,9 +16,11 @@ import { Hono } from 'hono'
 const app = new Hono()
  
 app.get('/ipinfo/:ip', async (c) => {
-  const ip = c.req.param('ip')
+  const rawIP = c.req.param('ip')
+  const ip = decodeURI(rawIP)
+
   const cachedData = await c.env.IP_STORE.get(ip, {type:"json"})
-  
+  console.log("ip: ", ip)
   if(cachedData?.ip == ip) {
 
     cachedData.cached = true
