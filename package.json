@@ -1,0 +1,26 @@
+{
+	"name": "ipinfo-proxy",
+	"version": "1.0.0",
+	"description": "simple proof of concept cache for ipinfo api",
+	"main": "index.js",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/plally/ipinfo-cache.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/plally/ipinfo-cache/issues"
+	},
+	"homepage": "https://github.com/plally/ipinfo-cache#readme",
+	"dependencies": {
+		"hono": "^2.0.2"
+	},
+	"devDependencies": {
+		"prettier": "2.7.1"
+	}
+}
