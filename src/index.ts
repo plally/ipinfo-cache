@@ -2,10 +2,10 @@ export interface Env {
 	IP_STORE: KVNamespace;
 }
 
-import { Hono } from 'hono';
+import { Handler, Hono } from 'hono';
 const app = new Hono();
 
-app.get('/ipinfo/:ip', async (c) => {
+const getIPInfo: Handler = async (c) => {
 	const rawIP = c.req.param('ip');
 	const ip = decodeURI(rawIP);
 
@@ -33,6 +33,8 @@ app.get('/ipinfo/:ip', async (c) => {
 	);
 
 	return c.json(data);
-});
+}
+app.get('/ipinfo/:ip', getIPInfo);
+app.get('/ipinfo/:ip/json', getIPInfo);
 
 export default app;
