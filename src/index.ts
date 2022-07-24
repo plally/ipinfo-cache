@@ -20,23 +20,26 @@ app.get('/ipinfo/:ip', async (c) => {
   const ip = decodeURI(rawIP)
 
   const cachedData = await c.env.IP_STORE.get(ip, {type:"json"})
-  console.log("ip: ", ip)
-  if(cachedData?.ip == ip) {
 
-    cachedData.cached = true
+  if(cachedData?.ip == ip) {
     return c.json(cachedData)
   }
 
-  const resp = await fetch(`https://ipinfo.io/${ip}?token=${c.req.query('token')}`)
-  if(resp.status === 200){
-    const data = await resp.json()
-    await c.env.IP_STORE.put(ip, JSON.stringify(data), {expiration: Date.now()/1000 + 86400 })
+  const token = c.req.query('token')
 
-    return c.json(data)
+  const resp = await fetch(`https://ipinfo.io/${ip}?token=${token}`)
+  if(resp.status != 200){
+    return c.json({"error": resp.status})
   }
 
-  
-  return c.json({"error": resp.status})
+  const data: any = await resp.json()
+    
+  await c.env.IP_STORE.put(ip, JSON.stringify({
+    ...data,
+    cacheUpdatedAt: Date.now()
+  }), {expirationTtl: 86400 })
+
+  return c.json(data)
 })
  
  export default app

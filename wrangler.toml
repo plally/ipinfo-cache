@@ -3,5 +3,5 @@ main = "src/index.ts"
 compatibility_date = "2022-07-24"
 
 kv_namespaces = [
-    { binding = "IP_STORE", id = "3dc6a94da7e5433c817d868c59769ebd" }
+    { binding = "IP_STORE", id = "3dc6a94da7e5433c817d868c59769ebd", preview_id = "1e6fac976cd94d7fbda85f6d322d5689" }
 ]
